@@ -3,7 +3,7 @@ import RepositoryItem from "./RepositoryItem";
 
 const styles = StyleSheet.create({
   separator: {
-    height: 10,
+    height: 16,
   },
 });
 
@@ -59,6 +59,7 @@ const ItemSeparator = () => <View style={styles.separator} />;
 const RepositoryList = () => {
   return (
     <FlatList
+      style={styles.container}
       data={repositories}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item }) => <RepositoryItem key={item.id} item={item} />}

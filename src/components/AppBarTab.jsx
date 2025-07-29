@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 });
 
 const AppBarTab = () => {
-  return <Text style={styles.text}>Repositiries</Text>;
+  return <Text style={styles.text}>Repositories</Text>;
 };
 
 export default AppBarTab;
