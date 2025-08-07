@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import Text from "./Text";
-import convertorK from "../utils/convertorK";
+import convertorK from "../lib/convertorK";
 
 const styles = StyleSheet.create({
   statItem: { display: "flex", gap: 16, alignItems: "center" },
