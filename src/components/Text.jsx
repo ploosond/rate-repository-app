@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
   colorWhite: {
     color: "white",
   },
+  colorRed: {
+    color: "#d73a4a",
+  },
   fontSizeHeading: {
     fontSize: theme.fontSizes.heading,
   },
@@ -34,9 +37,11 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     color === "secondary" && styles.colorTextSecondary,
     color === "primary" && styles.colorPrimary,
     color === "white" && styles.colorWhite,
+    color === "red" && styles.colorRed,
     fontSize === "heading" && styles.fontSizeHeading,
     fontSize === "subheading" && styles.fontSizeSubheading,
     fontWeight === "bold" && styles.fontWeightBold,
+    style,
   ];
   return <NativeText style={textStyle} {...props} />;
 };
