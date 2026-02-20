@@ -1,5 +1,5 @@
-import { Text as NativeText, StyleSheet } from "react-native";
-import theme from "../theme";
+import { Text as NativeText, StyleSheet } from 'react-native';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   text: {
@@ -8,20 +8,17 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.main,
     fontWeight: theme.fontWeights.normal,
   },
-  colorTextSecondary: {
-    color: theme.colors.textSecondary,
-  },
   colorPrimary: {
     color: theme.colors.primary,
   },
+  colorTextSecondary: {
+    color: theme.colors.textSecondary,
+  },
   colorWhite: {
-    color: "white",
+    color: theme.colors.white,
   },
-  colorRed: {
-    color: "#d73a4a",
-  },
-  fontSizeHeading: {
-    fontSize: theme.fontSizes.heading,
+  colorAlert: {
+    color: theme.colors.alert,
   },
   fontSizeSubheading: {
     fontSize: theme.fontSizes.subheading,
@@ -34,13 +31,12 @@ const styles = StyleSheet.create({
 const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
   const textStyle = [
     styles.text,
-    color === "secondary" && styles.colorTextSecondary,
-    color === "primary" && styles.colorPrimary,
-    color === "white" && styles.colorWhite,
-    color === "red" && styles.colorRed,
-    fontSize === "heading" && styles.fontSizeHeading,
-    fontSize === "subheading" && styles.fontSizeSubheading,
-    fontWeight === "bold" && styles.fontWeightBold,
+    color === 'primary' && styles.colorPrimary,
+    color === 'textSecondary' && styles.colorTextSecondary,
+    color === 'white' && styles.colorWhite,
+    color === 'alert' && styles.colorAlert,
+    fontSize === 'subheading' && styles.fontSizeSubheading,
+    fontWeight === 'bold' && styles.fontWeightBold,
     style,
   ];
   return <NativeText style={textStyle} {...props} />;

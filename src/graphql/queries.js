@@ -1,20 +1,23 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const GET_REPOSITORIES = gql`
-  query {
+  query Repositories {
     repositories {
       edges {
         node {
+          id
           fullName
-          ownerAvatarUrl
           description
           language
           stargazersCount
           forksCount
           reviewCount
           ratingAverage
+          ownerAvatarUrl
         }
       }
     }
   }
 `;
+
+// other queries...
