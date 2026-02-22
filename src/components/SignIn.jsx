@@ -45,6 +45,7 @@ const SignIn = () => {
 
     try {
       const { data } = await signIn({ username, password });
+      console.log(data.authenticate.accessToken);
       if (data) {
         navigate('/');
       }
