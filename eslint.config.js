@@ -35,5 +35,10 @@ export default [
       'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
     },
+    extends: [
+      'eslint:recommended',
+      'plugin:react/recommended',
+      'plugin:jest/recommended',
+    ],
   },
 ];
