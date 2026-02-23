@@ -1,6 +1,8 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Alert, Image, Pressable, StyleSheet, View } from 'react-native';
 import Text from './Text';
 import theme from '../theme';
+import * as Linking from 'expo-linking';
+import { useCallback } from 'react';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,29 +37,64 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
+  button: {
+    backgroundColor: theme.colors.primary,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    textAlign: 'center',
+  },
 });
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, showButton }) => {
+  const {
+    id,
+    fullName,
+    description,
+    language,
+    stargazersCount,
+    forksCount,
+    reviewCount,
+    ratingAverage,
+    ownerAvatarUrl,
+    url,
+  } = item;
+  const handleUrlPress = () => Linking.openURL(url);
+
   return (
     <View testID='repositoryItem' style={styles.container}>
       <View style={styles.image_Bio}>
         <View>
-          <Image style={styles.image} source={{ uri: item.ownerAvatarUrl }} />
+          <Image style={styles.image} source={{ uri: ownerAvatarUrl }} />
         </View>
         <View style={styles.bio}>
-          <Text fontWeight='bold'>{item.fullName}</Text>
-          <Text color='textSecondary'>{item.description}</Text>
+          <Text fontWeight='bold'>{fullName}</Text>
+          <Text color='textSecondary'>{description}</Text>
           <View style={styles.langaugeView}>
-            <Text color='white'>{item.language}</Text>
+            <Text color='white'>{language}</Text>
           </View>
         </View>
       </View>
       <View style={styles.stats}>
-        <Stats title='Stars' value={convertToK(item.stargazersCount)} />
-        <Stats title='Forks' value={convertToK(item.forksCount)} />
-        <Stats title='Reviews' value={item.reviewCount} />
-        <Stats title='Rating' value={item.ratingAverage} />
+        <Stats title='Stars' value={convertToK(stargazersCount)} />
+        <Stats title='Forks' value={convertToK(forksCount)} />
+        <Stats title='Reviews' value={reviewCount} />
+        <Stats title='Rating' value={ratingAverage} />
       </View>
+      {showButton && (
+        <Pressable style={styles.button} onPress={handleUrlPress}>
+          <Text
+            color='white'
+            fontSize='subheading'
+            fontWeight='bold'
+            style={styles.buttonText}
+          >
+            Open in GitHub
+          </Text>
+        </Pressable>
+      )}
     </View>
   );
 };
