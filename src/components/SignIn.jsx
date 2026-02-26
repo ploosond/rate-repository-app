@@ -5,6 +5,8 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import useSignIn from '../../hooks/useSignIn';
 import { useNavigate } from 'react-router-native';
+import { useApolloClient } from '@apollo/client';
+import useAuthStorage from '../../hooks/useAuthStorage';
 
 const styles = StyleSheet.create({
   container: {
@@ -101,13 +103,15 @@ export const SignInContainer = ({ onSubmit }) => {
 const SignIn = () => {
   const [signIn] = useSignIn();
   const navigate = useNavigate();
+  const authStorage = useAuthStorage();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
 
     try {
       const { data } = await signIn({ username, password });
-      console.log(data.authenticate.accessToken);
+      const authToken = await authStorage.getAccessToken();
+      console.log('AUTH: ', authToken);
       if (data) {
         navigate('/');
       }

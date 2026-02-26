@@ -21,23 +21,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,
-    gap: 10,
+    gap: 15,
+  },
+  tabs: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 15,
   },
 });
 
 const AppBar = () => {
   const { data } = useQuery(ME);
-  const authStorgae = useAuthStorage();
+  const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
   const navigate = useNavigate();
 
   const signOut = async () => {
     try {
-      await authStorgae.removeAccessToken();
-      apolloClient.resetStore();
-      navigate('/sign-in');
-
+      await authStorage.removeAccessToken();
+      await apolloClient.resetStore();
       console.log('clicked sign out!');
+      const authToken = await authStorage.getAccessToken();
+      console.log('AUTH: ', authToken);
+      navigate('/sign-in');
     } catch (e) {
       console.log(e);
     }
@@ -52,9 +58,16 @@ const AppBar = () => {
           </Link>
         </Pressable>
         {data?.me?.username ? (
-          <Pressable onPress={signOut}>
-            <AppBarTab text='Sign out' />
-          </Pressable>
+          <View style={styles.tabs}>
+            <Pressable>
+              <Link to='/create-review'>
+                <AppBarTab text='Create a review' />
+              </Link>
+            </Pressable>
+            <Pressable onPress={signOut}>
+              <AppBarTab text='Sign out' />
+            </Pressable>
+          </View>
         ) : (
           <Pressable>
             <Link to='/sign-in'>
