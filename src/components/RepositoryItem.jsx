@@ -2,7 +2,6 @@ import { Alert, Image, Pressable, StyleSheet, View } from 'react-native';
 import Text from './Text';
 import theme from '../theme';
 import * as Linking from 'expo-linking';
-import { useCallback } from 'react';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,6 +9,7 @@ const styles = StyleSheet.create({
     padding: 20,
     gap: 10,
     backgroundColor: theme.colors.white,
+    marginBottom: 10,
   },
   image_Bio: {
     display: 'flex',
@@ -48,9 +48,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryItem = ({ item, showButton }) => {
+const RepositoryItem = ({ repository, showButton }) => {
   const {
-    id,
     fullName,
     description,
     language,
@@ -60,7 +59,7 @@ const RepositoryItem = ({ item, showButton }) => {
     ratingAverage,
     ownerAvatarUrl,
     url,
-  } = item;
+  } = repository;
   const handleUrlPress = () => Linking.openURL(url);
 
   return (

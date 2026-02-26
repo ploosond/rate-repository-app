@@ -8,9 +8,9 @@ const useRepository = (id) => {
   });
 
   return {
-    item: data?.repository,
-    loading,
-    error,
+    repository: data?.repository,
+    repoLoading: loading,
+    repoError: error,
   };
 };
 
