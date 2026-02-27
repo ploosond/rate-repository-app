@@ -52,7 +52,6 @@ export const CreateReview = () => {
         rating,
         text,
       });
-      console.log('create review!', data?.createReview.id);
       if (data) {
         navigate(`/repositories/${ownerName}.${repositoryName}`);
       }

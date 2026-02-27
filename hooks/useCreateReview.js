@@ -14,9 +14,6 @@ const useCreateReview = () => {
           review: { repositoryName, ownerName, rating: Number(rating), text },
         },
       });
-      console.log('clicked review submit!');
-      const authToken = await authStorage.getAccessToken();
-      console.log('AUTH: ', authToken);
       apolloClient.resetStore();
       return { data };
     } catch (e) {
