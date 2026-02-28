@@ -1,4 +1,4 @@
-import { Alert, Image, Pressable, StyleSheet, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 import Text from './Text';
 import theme from '../theme';
 import * as Linking from 'expo-linking';
