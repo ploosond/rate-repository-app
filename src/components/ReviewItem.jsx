@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 const ReviewItem = ({ review }) => {
-  const { rating, createdAt, text, repository } = review;
+  const { rating, createdAt, text, repository, user } = review;
   const formattedCreatedDate = new Date(createdAt).toLocaleDateString('de');
   return (
     <View style={styles.container}>
@@ -38,7 +38,9 @@ const ReviewItem = ({ review }) => {
         </Text>
       </View>
       <View style={styles.review}>
-        <Text fontWeight='bold'>{repository.fullName}</Text>
+        <Text fontWeight='bold'>
+          {user ? user.username : repository.fullName}
+        </Text>
         <Text color='textSecondary'>{formattedCreatedDate}</Text>
         <Text style={{ flex: 1 }}>{text}</Text>
       </View>

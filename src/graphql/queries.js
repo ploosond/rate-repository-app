@@ -55,9 +55,9 @@ export const GET_REPOSITORY_REVIEWS = gql`
             rating
             createdAt
             text
-            repository {
+            user {
               id
-              fullName
+              username
             }
           }
         }
