@@ -24,19 +24,17 @@ const SingleRepository = () => {
   if (reviewLoading) return <Text>Loading...</Text>;
   if (reviewError) return <Text>Error: {reviewError.message}</Text>;
 
+  const reviewNodes = reviews ? reviews?.map((edge) => edge.node) : [];
+
   return (
     <FlatList
-      data={reviews}
-      renderItem={({ item }) => <ReviewItem key={item.id} review={item} />}
-      keyExtractor={({ id }) => id}
+      data={reviewNodes}
+      renderItem={({ item }) => <ReviewItem review={item} />}
       ListHeaderComponent={() => (
-        <RepositoryItem
-          key={repository.id}
-          repository={repository}
-          showButton={true}
-        />
+        <RepositoryItem repository={repository} showButton={true} />
       )}
       ItemSeparatorComponent={ItemSeparator}
+      keyExtractor={(item) => item.id}
     />
   );
 };

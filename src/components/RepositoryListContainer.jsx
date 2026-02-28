@@ -1,9 +1,7 @@
-import { useMemo } from 'react';
 import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { useNavigate } from 'react-router-native';
 import RepositoryItem from './RepositoryItem';
 import RepositoryListHeader from './RepositoryListHeader';
-import Text from './Text';
 
 const styles = StyleSheet.create({
   separator: {
@@ -19,11 +17,6 @@ const RepositoryListContainer = ({ repositories }) => {
     ? repositories?.edges?.map((edge) => edge.node)
     : [];
 
-  const renderHeader = useMemo(
-    () => <RepositoryListHeader />,
-    [],
-  );
-
   return (
     <FlatList
       data={repositoryNodes}
@@ -34,7 +27,7 @@ const RepositoryListContainer = ({ repositories }) => {
         </Pressable>
       )}
       keyExtractor={(item) => item.id}
-      ListHeaderComponent={renderHeader}
+      ListHeaderComponent={RepositoryListHeader}
     />
   );
 };

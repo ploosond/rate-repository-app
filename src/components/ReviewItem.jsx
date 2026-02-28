@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 const ReviewItem = ({ review }) => {
-  const { rating, user, createdAt, text } = review.node;
+  const { rating, user, createdAt, text } = review;
   const formattedCreatedDate = new Date(createdAt).toLocaleDateString('de');
   return (
     <View style={styles.container}>
