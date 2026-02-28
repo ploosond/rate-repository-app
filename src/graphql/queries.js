@@ -52,12 +52,12 @@ export const GET_REPOSITORY_REVIEWS = gql`
         edges {
           node {
             id
-            text
             rating
             createdAt
-            user {
+            text
+            repository {
               id
-              username
+              fullName
             }
           }
         }
@@ -67,9 +67,23 @@ export const GET_REPOSITORY_REVIEWS = gql`
 `;
 
 export const ME = gql`
-  query Me {
+  query Me($includeReviews: Boolean = false) {
     me {
       username
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            id
+            rating
+            createdAt
+            text
+            repository {
+              id
+              fullName
+            }
+          }
+        }
+      }
     }
   }
 `;

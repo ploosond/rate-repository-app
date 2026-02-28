@@ -1,10 +1,8 @@
 import { useApolloClient, useMutation } from '@apollo/client';
 import { CREATE_REVIEW } from '../src/graphql/mutations';
-import useAuthStorage from './useAuthStorage';
 
 const useCreateReview = () => {
   const [mutate, result] = useMutation(CREATE_REVIEW);
-  const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
 
   const createReview = async ({ repositoryName, ownerName, rating, text }) => {

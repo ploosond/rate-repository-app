@@ -8,7 +8,7 @@ const useRepositoryReviews = (id) => {
   });
 
   return {
-    reviews: data?.repository?.reviews?.edges,
+    reviews: data?.repository?.reviews,
     reviewLoading: loading,
     reviewError: error,
   };

@@ -5,6 +5,7 @@ import Text from './Text';
 import useRepositoryReviews from '../../hooks/useRepositoryReviews';
 import { FlatList, StyleSheet, View } from 'react-native';
 import ReviewItem from './ReviewItem';
+import useMe from '../../hooks/useMe';
 
 const styles = StyleSheet.create({
   separator: {
@@ -14,15 +15,10 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const SingleRepository = () => {
-  const { id } = useParams();
-  const { repository, repoLoading, repoError } = useRepository(id);
-  const { reviews, reviewLoading, reviewError } = useRepositoryReviews(id);
-  if (repoLoading) return <Text>Loading...</Text>;
-  if (repoError) return <Text>Error: {repoError.message}</Text>;
-
-  if (reviewLoading) return <Text>Loading...</Text>;
-  if (reviewError) return <Text>Error: {reviewError.message}</Text>;
+const MyReviews = () => {
+  const { reviews, loading, error } = useMe(true);
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error: {error.message}</Text>;
 
   const reviewNodes = reviews ? reviews?.edges?.map((edge) => edge.node) : [];
 
@@ -30,13 +26,10 @@ const SingleRepository = () => {
     <FlatList
       data={reviewNodes}
       renderItem={({ item }) => <ReviewItem review={item} />}
-      ListHeaderComponent={() => (
-        <RepositoryItem repository={repository} showButton={true} />
-      )}
       ItemSeparatorComponent={ItemSeparator}
       keyExtractor={(item) => item.id}
     />
   );
 };
 
-export default SingleRepository;
+export default MyReviews;

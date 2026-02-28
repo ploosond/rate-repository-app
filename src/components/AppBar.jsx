@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-native';
 import { useApolloClient, useQuery } from '@apollo/client';
 import { ME } from '../graphql/queries';
 import useAuthStorage from '../../hooks/useAuthStorage';
+import useMe from '../../hooks/useMe';
 
 const styles = StyleSheet.create({
   safe: {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  const { data } = useQuery(ME);
+  const { username } = useMe(false);
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
   const navigate = useNavigate();
@@ -54,11 +55,16 @@ const AppBar = () => {
             <AppBarTab text='Repositories' />
           </Link>
         </Pressable>
-        {data?.me?.username ? (
+        {username ? (
           <View style={styles.tabs}>
             <Pressable>
               <Link to='/create-review'>
                 <AppBarTab text='Create a review' />
+              </Link>
+            </Pressable>
+            <Pressable>
+              <Link to='/my-reviews'>
+                <AppBarTab text='My reviews' />
               </Link>
             </Pressable>
             <Pressable onPress={signOut}>
