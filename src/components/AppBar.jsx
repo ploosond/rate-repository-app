@@ -40,9 +40,6 @@ const AppBar = () => {
     try {
       await authStorage.removeAccessToken();
       await apolloClient.resetStore();
-      console.log('clicked sign out!');
-      const authToken = await authStorage.getAccessToken();
-      console.log('AUTH: ', authToken);
       navigate('/sign-in');
     } catch (e) {
       console.log(e);
