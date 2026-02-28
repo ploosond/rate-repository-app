@@ -1,14 +1,26 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import SortRepositoriesContext from '../contexts/SortRepositoriesContext';
+import { Searchbar } from 'react-native-paper';
+import theme from '../theme';
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
-  dropdown: {
-    minHeight: 50,
+  container: {
     display: 'flex',
-    justifyContent: 'center',
-    paddingHorizontal: 15,
+    gap: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+  },
+  searchBar: {
+    backgroundColor: theme.colors.white,
+    borderRadius: 5,
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+  },
+  dropdown: {
+    paddingHorizontal: 5,
   },
 });
 
@@ -27,12 +39,20 @@ const data = [
   },
 ];
 
-const OrderDropdown = () => {
+const RepositoryListHeader = () => {
   const { state, dispatch } = useContext(SortRepositoriesContext);
 
   return (
-    <View style={styles.dropdown}>
+    <View style={styles.container}>
+      <Searchbar
+        style={styles.searchBar}
+        mode='bar'
+        placeholder='Search'
+        onChangeText={(text) => dispatch({ type: 'SET_SEARCH', payload: text })}
+        value={state.searchKeyword}
+      />
       <Dropdown
+        style={styles.dropdown}
         mode='modal'
         data={data}
         maxHeight={300}
@@ -41,7 +61,6 @@ const OrderDropdown = () => {
         placeholder={state.label}
         value={state.value}
         onChange={(item) => {
-          console.log(item);
           dispatch({
             type: 'SET_SORT',
             payload: item,
@@ -52,4 +71,4 @@ const OrderDropdown = () => {
   );
 };
 
-export default OrderDropdown;
+export default RepositoryListHeader;

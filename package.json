@@ -38,7 +38,9 @@
     "react-dom": "19.0.0",
     "react-native": "0.79.5",
     "react-native-element-dropdown": "^2.12.4",
+    "react-native-paper": "^5.15.0",
     "react-router-native": "^6.30.0",
+    "use-debounce": "^10.1.0",
     "yup": "^1.7.0"
   },
   "devDependencies": {
