@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryListContainer = ({ repositories }) => {
+const RepositoryListContainer = ({ repositories, onEndReach }) => {
   const navigate = useNavigate();
   const repositoryNodes = repositories
     ? repositories?.edges?.map((edge) => edge.node)
@@ -28,6 +28,8 @@ const RepositoryListContainer = ({ repositories }) => {
       )}
       keyExtractor={(item) => item.id}
       ListHeaderComponent={RepositoryListHeader}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
